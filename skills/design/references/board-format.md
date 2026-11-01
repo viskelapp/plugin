@@ -109,7 +109,7 @@ Events:
 
 - Network URLs in `src`, `href`, `action`, `poster`, `data`, CSS `url()` or `@import`. The one exception is a Google Fonts stylesheet: `<link href="https://fonts.googleapis.com/css2?…">`.
 - `<iframe>`.
-- In board logic: ES `import`, `fetch`, `XMLHttpRequest`, `eval`, `new Function`, `.innerHTML =`, `.appendChild(`, and `window`/`document` key listeners.
+- In board logic: ES module imports, network requests (the fetch API or XHR), runtime code evaluation (the eval function or the Function constructor), `.innerHTML =`, `.appendChild(`, and `window`/`document` key listeners.
 - Invalid `data-props` JSON; a `<dc-import>` naming a missing board; a board name used on two pages.
 
 And as warnings: no `<x-dc>` root, no `/runtime/dc-runtime.js`, a `{{…}}` that is not a plain path, and an `<x-import>` namespace no design system provides.
