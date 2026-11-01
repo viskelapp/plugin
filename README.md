@@ -1,3 +1,10 @@
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
+    <img src="assets/logo.svg" alt="Viskel" height="64">
+  </picture>
+</p>
+
 # Viskel plugin for Claude
 
 Design on the [Viskel](https://app.viskel.com) canvas from Claude. The plugin connects Claude to the Viskel MCP server and adds skills for the common jobs: building and editing boards, working through review comments, organising sections for handoff, writing collections, and importing claude.ai Design canvases.
