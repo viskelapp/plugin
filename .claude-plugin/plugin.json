@@ -1,0 +1,22 @@
+{
+  "name": "viskel",
+  "displayName": "Viskel",
+  "version": "0.1.0",
+  "description": "Create and edit Viskel designs from Claude: boards, comments, sections, collections and claude.ai Design imports, over the Viskel MCP server with OAuth sign-in.",
+  "author": {
+    "name": "Viskel",
+    "url": "https://app.viskel.com"
+  },
+  "homepage": "https://app.viskel.com",
+  "repository": "https://github.com/viskelapp/plugin",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://github.com/viskelapp/plugin#privacy",
+  "keywords": [
+    "design",
+    "canvas",
+    "mcp",
+    "prototyping",
+    "viskel"
+  ],
+  "icon": "./assets/icon.svg"
+}
