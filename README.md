@@ -29,14 +29,14 @@ Then run `/mcp`, pick the `viskel` server of the plugin and sign in.
 
 ### claude.ai and Claude Desktop
 
-1. Customize > Plugins: add `viskelapp/plugin` and install Viskel.
+1. Customize > Plugins > Add > Add marketplace: paste `https://github.com/viskelapp/plugin`, then install Viskel.
 2. Customize > Plugins > Viskel > Connectors tab: Add (if it shows Not added), then Connect, and sign in. On Team/Enterprise, an Owner must add it.
 
 ## Signing in and out
 
 The plugin connects to `https://app.viskel.com/mcp` with OAuth: Claude registers itself, you sign in to Viskel in the browser and approve it. No token to copy. An access token lasts an hour and Claude refreshes it for up to 30 days of inactivity.
 
-To sign out, disconnect the app at https://app.viskel.com/settings/connected-apps, or clear the authentication in `/mcp` (Claude Code) or Connectors (claude.ai).
+To sign out, disconnect the app at https://app.viskel.com/settings/connected-apps, or clear the authentication in `/mcp` (Claude Code) or Customize > Connectors (claude.ai and Claude Desktop).
 
 ## Skills
 
@@ -70,7 +70,7 @@ Claude Code: run `/plugin marketplace update viskelapp`, then in `/plugin` > Ins
 
 ## Troubleshooting
 
-- **Tools missing or "unauthorized"**: sign in again in `/mcp` or Connectors.
+- **Tools missing or "unauthorized"**: sign in again in `/mcp` or Customize > Connectors.
 - **Sign-in refused**: you need an existing Viskel account; OAuth does not create one.
 - **"Too many requests" when connecting**: the server allows ten client registrations per hour from one address. Wait an hour and connect again.
 - **Two sets of Viskel tools**: remove the hand-added server (see above).
