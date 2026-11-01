@@ -1,0 +1,18 @@
+{
+  "name": "viskelapp",
+  "owner": {
+    "name": "Viskel",
+    "url": "https://app.viskel.com"
+  },
+  "metadata": {
+    "description": "The Viskel plugin for Claude: design on the Viskel canvas from Claude Code and claude.ai."
+  },
+  "plugins": [
+    {
+      "name": "viskel",
+      "source": "./",
+      "description": "Create and edit Viskel designs from Claude.",
+      "category": "design"
+    }
+  ]
+}
