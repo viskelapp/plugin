@@ -1,6 +1,6 @@
 ---
 name: design
-description: Create or change a Viskel design (boards on the Viskel canvas). Use when the user asks to design, mock up, prototype or edit screens, pages or boards in Viskel, pastes a Viskel canvas or prototype link, or refers to "the selected element" in Viskel.
+description: Create or change a Viskel design (boards on the Viskel canvas). Use when the user asks to design, mock up, prototype or edit screens, pages or boards in Viskel, pastes a Viskel canvas, share or prototype link, or refers to "the selected element" in Viskel.
 ---
 
 # Design in Viskel
@@ -18,7 +18,7 @@ The user needs an existing account on https://app.viskel.com; signing in never c
 
 ## 2. Find the design
 
-- A pasted canvas or prototype link: `resolve_link` gives the design, page, board file and line.
+- A pasted link: `resolve_link` gives the design, page, board file and line. It takes canvas links (`…/<space>/designs/<key>/canvas#…`), share links (`…/s/<token>#page=…&board=…&node=…`, which Copy link now gives) and prototype links (`…/designs/<key>/play/<board>` or `…/s/<token>/play/<board>`).
 - "The selected element" or "what I picked": `get_selection`.
 - A name: `list_designs`, then `get_design` for pages, boards and viewer links.
 - Nothing yet: `create_design` with a short `name`, a `title` and `pages` (`id`, `name`, `type`: website, app-screens, poster, social or wireframe). Ask which space when `list_designs` shows more than one.
