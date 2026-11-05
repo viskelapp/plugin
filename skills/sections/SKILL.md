@@ -28,7 +28,7 @@ Before labelling a section `ready-for-dev`, for every board in it:
 
 ## 4. Jira
 
-- The design needs a Jira base URL once: `update_design` with `jiraBaseUrl` (needs the admin role; ask the user for the URL, e.g. https://yourcompany.atlassian.net).
+- The design needs a Jira base URL once: `update_design` with `jiraBaseUrl` (only a workspace owner can set it; ask the user for the URL, e.g. https://yourcompany.atlassian.net).
 - `link_jira` (`design`, `page`, `name`, `keys`) links a board to issue keys. Use your Jira tools, if any, for the issues themselves.
 - `find_boards` with `jira` finds the boards linked to an issue, in one design or all.
 

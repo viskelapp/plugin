@@ -14,7 +14,7 @@ Design on the [Viskel](https://app.viskel.com) canvas from Claude. The plugin co
 
 ## Requirements
 
-An existing account on https://app.viskel.com. Signing in through Claude never creates an account; ask your space admin for an invitation.
+An existing account on https://app.viskel.com. Signing in through Claude never creates an account; ask a workspace owner for an invitation.
 
 ## Install
 
