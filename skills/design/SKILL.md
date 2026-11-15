@@ -52,7 +52,7 @@ After each board, not at the end:
 
 - `claim_board` before a longer edit on an existing board; `release_board` when done. A claim warns others, it does not lock.
 - Keep the `cursor` from each result and pass it as `since` on the next write. If `changedByOthers` lists your board, `read_file` before editing again.
-- Something went wrong: `list_versions` for the file, then `revert_file` with the version to go back to. Nothing is lost.
+- Something went wrong: `list_versions` for the file, then `revert_file` with the version to go back to. Nothing is lost. Version history needs the Pro plan or above; on Free, `restore` still brings back deleted files from the trash.
 
 ## 7. Finish
 
