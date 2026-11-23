@@ -64,7 +64,7 @@ JSON in single quotes on the `text/x-dc` script; write a `'` inside it as `&#39;
 ```
 
 - `sc-for`: `list="{{xs}}"` or `each="xs"`; `as` defaults to `item`; `index` is optional.
-- `sc-if`: `value="{{cond}}"` (truthy), or `test` with a path, `!path`, or `a OP b` where OP is `===`, `!==`, `==`, `!=`, `>`, `<`, `>=`, `<=`. `==` is strict. Use it for parts of a screen (an open menu, an empty list), not to switch whole screens: give each screen or state its own board; `validate` warns when a board switches three or more.
+- `sc-if`: `value="{{cond}}"` (truthy), or `test` with a path, `!path`, or `a OP b` where OP is `===`, `!==`, `==`, `!=`, `>`, `<`, `>=`, `<=`. `==` is strict. Use it for parts of a screen (an open menu, an expanded row), not to switch whole screens: give each screen or state its own board; `validate` warns when a board switches three or more.
 
 ## Logic: `DCLogic`
 
@@ -112,4 +112,4 @@ Events:
 - In board logic: ES module imports, network requests (the fetch API or XHR), runtime code evaluation (the eval function or the Function constructor), `.innerHTML =`, `.appendChild(`, and `window`/`document` key listeners.
 - Invalid `data-props` JSON; a `<dc-import>` naming a missing board; a board name used on two pages.
 
-And as warnings: no `<x-dc>` root, no `/runtime/dc-runtime.js`, a `{{…}}` that is not a plain path, and an `<x-import>` namespace no design system provides.
+And as warnings: no `<x-dc>` root, no `/runtime/dc-runtime.js`, a `{{…}}` that is not a plain path, an `<x-import>` namespace no design system provides, and a board that switches three or more whole screens on one state key with `<sc-if>`.
