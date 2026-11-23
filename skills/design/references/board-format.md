@@ -64,7 +64,7 @@ JSON in single quotes on the `text/x-dc` script; write a `'` inside it as `&#39;
 ```
 
 - `sc-for`: `list="{{xs}}"` or `each="xs"`; `as` defaults to `item`; `index` is optional.
-- `sc-if`: `value="{{cond}}"` (truthy), or `test` with a path, `!path`, or `a OP b` where OP is `===`, `!==`, `==`, `!=`, `>`, `<`, `>=`, `<=`. `==` is strict.
+- `sc-if`: `value="{{cond}}"` (truthy), or `test` with a path, `!path`, or `a OP b` where OP is `===`, `!==`, `==`, `!=`, `>`, `<`, `>=`, `<=`. `==` is strict. Use it for parts of a screen (an open menu, an empty list), not to switch whole screens: give each screen or state its own board; `validate` warns when a board switches three or more.
 
 ## Logic: `DCLogic`
 

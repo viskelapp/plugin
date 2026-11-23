@@ -27,7 +27,7 @@ The user needs an existing account on https://app.viskel.com; signing in never c
 
 1. `read_file` the design `CLAUDE.md` and the page `pages/<page>/PAGE.md`. Follow them over anything here.
 2. `list_boards` for the page, so new boards fit the existing names and rows.
-3. Plan the boards before writing: one board per screen or state, names in PascalCase (`Checkout`, `CheckoutError`), sizes from `PAGE.md` (1440 desktop, 390 phone). Repeated parts (header, footer, card) become their own board and are reused with `<dc-import>`.
+3. Plan the boards before writing: one board per screen or state, linked for play mode with `<a href="Other.dc.html">` or `data-goto`, never several screens switched with `<sc-if>` inside one board, because comments and Jira links attach to a board. Names in PascalCase (`Checkout`, `CheckoutError`), sizes from `PAGE.md` (1440 desktop, 390 phone). Repeated parts (header, footer, card) become their own board and are reused with `<dc-import>`.
 4. Tell the user the plan in a few lines when it is more than two boards.
 
 ## 4. Build
