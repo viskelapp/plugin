@@ -48,6 +48,7 @@ To sign out, disconnect the app at https://app.viskel.com/settings/connected-app
 | `/viskel:collections` | Write a collection of self-contained HTML artifact pages. |
 | `/viskel:import-claude-design` | Bring a claude.ai Design canvas into Viskel as a new design. |
 | `/viskel:design-language` | Fill a design system's tokens, identity guide and base stylesheet from a repo. |
+| `/viskel:components-from-code` | Port a repo's components into a design system as families, and its compositions as patterns, layouts and pages. |
 
 Claude picks the right skill from what you ask; the slash commands start one directly.
 
