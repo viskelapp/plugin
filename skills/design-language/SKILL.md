@@ -11,7 +11,7 @@ Workflow for filling a Viskel design system from a repository. The Viskel server
 
 1. Call `list_design_systems`. If the Viskel tools are missing or answer with an auth error, sign in as `/viskel:design` step 1 says.
 2. Use the system the user named. If there is none, create it with `update_design_system` path `starter`, `system` its name and patch `{title, description}` (no choices: the repo sets the look). Use the space the user named, else the current one, and say which in the report.
-3. `get_design_system(system)`, then `get_design_system(system, "checklist")`. Read `tokens.color` and the identity section you are about to write before writing it, so you send the shapes it takes.
+3. `get_design_system(system)`, then `get_design_system(system, "checklist")`. Before each write, read what it changes (`tokens.<category>` after the import, the identity section before its write), so you send the shapes it takes.
 
 ## 2. Survey the repo
 
@@ -26,14 +26,15 @@ Find where the design language lives before you send anything. Note file and lin
 
 ## 3. Tokens
 
-1. Send the stylesheet with `update_design_system` path `import` and `files: [{name: "app.css", content: "<the file's text>"}]` but no `apply`. Leave out blocks that hold no variables (utilities, keyframes) when the file is long. Read the report: mapped, custom, derived and unmapped rows, the mode rows for dark and other themes, and the derived neutral scale.
+1. Send the stylesheet with `update_design_system` path `import` and `files: [{name: "app.css", content: "<the file's text>"}]` but no `apply`. Keep `@theme`/`@theme inline`, `:root` and the theme selectors (`.dark`, `[data-theme]`); leave out utilities and keyframes when the file is long. Read the report: mapped, custom, derived and unmapped rows, the mode rows for dark and other themes, and the derived neutral scale.
 2. If the mapping is right, apply that dry run with `{import: "<id>", apply: true}` instead of sending the files again. If the draft changed, run the dry run again.
-3. Fill what the import could not: values from the Tailwind config or from usage (status colours, the neutral hue, fonts, shadows, radii). Send one `update_design_system` call with path `tokens` per category, every slot of that category in its patch.
-4. `get_design_system(system, "tokens.<category>")` for colour, font, text, radius, spacing and shadow. A slot with status `default` while the repo defines another value is a miss: fix it. A default that equals the framework's own default the repo uses unchanged (Tailwind's shadows, type scale, spacing) is right; report it as found.
+3. Check the neutral scale: when the repo names a base colour (shadcn `components.json` `baseColor`, a Tailwind palette used for greys), set `color.neutral.*` to that palette's steps. Status colours come in pairs: a `bg-<hue>-50` surface with `text-<hue>-600/700` maps to `color.<state>` and `color.<state>-foreground`.
+4. Fill what the import could not: values from the Tailwind config or from usage (status colours, the neutral hue, fonts, shadows, radii). Send one `update_design_system` call with path `tokens` per category, every slot of that category in its patch: `{"color.success": {value, modes: {theme: {dark: …}}}, …}`. Values the system has no slot for (an app header height) go into the layout rules and the report.
+5. `get_design_system(system, "tokens.<category>")` for colour, font, text, radius, spacing and shadow. A slot with status `default` while the repo defines another value is a miss: fix it. A default that equals the framework's own default the repo uses unchanged (Tailwind's shadows, type scale, spacing) is right; report it as found.
 
 ## 4. Identity
 
-Write each identity section with `update_design_system` path `identity.<section>`: its choices first, then rules. The choice keys and their kinds (text, enum values, a slot reference or a list of them) are at the end of `update_design_system`'s description; `get_design_system(system, "checklist")` lists the choices each section still needs. A rule is `{text, severity, scope}`; leave `check` out unless the description's check grammar fits it exactly. Rules state the product's intent from its conventions, with the evidence where it helps ("Status colours only on badges and alerts: 40 uses in components/ui"). Where the code breaks its own convention (`text-[10px]` against a 12px floor), write the intended rule and list the deviation in the report, not as a rule.
+Write each identity section with `update_design_system` path `identity.<section>`: its choices first, then rules. The choice keys and their kinds (text, enum values, a slot reference or a list of them) are at the end of `update_design_system`'s description; `get_design_system(system, "checklist")` lists the choices each section still needs. A rule is `{text, severity, scope}`: the text names the thing itself and the severity gives the verb (`never` "raw palette colours for status", `prefer` "status colours on badges and alerts"); the scope says where it applies, in a word or two. Leave `check` out unless the description's check grammar fits it exactly. Rules state the product's intent from its conventions, with the evidence where it helps ("Status colours only on badges and alerts: 40 uses in components/ui"). Where the code breaks its own convention (`text-[10px]` against a 12px floor), write the intended rule and list the deviation in the report, not as a rule.
 
 Cover colour use (which roles carry brand, how status shows), type roles and sizes, shape and depth, layout and density, icons, motion, accessibility, and the Never list: what the product never does.
 
