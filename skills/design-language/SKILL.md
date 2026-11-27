@@ -10,7 +10,7 @@ Workflow for filling a Viskel design system from a repository. The Viskel server
 ## 1. Connect and pick the system
 
 1. Call `list_design_systems`. If the Viskel tools are missing or answer with an auth error, sign in as `/viskel:design` step 1 says.
-2. Use the system the user named. If there is none, ask which space, then create it with `update_design_system` path `starter` and no choices.
+2. Use the system the user named. If there is none, create it with `update_design_system` path `starter`, `system` its name and patch `{title, description}` (no choices: the repo sets the look). Use the space the user named, else the current one, and say which in the report.
 3. `get_design_system(system)`, then `get_design_system(system, "checklist")`. Read `tokens.color` and the identity section you are about to write before writing it, so you send the shapes it takes.
 
 ## 2. Survey the repo
@@ -18,22 +18,22 @@ Workflow for filling a Viskel design system from a repository. The Viskel server
 Find where the design language lives before you send anything. Note file and line for every value.
 
 - **Token sources:** stylesheets with custom properties (`app.css`, `globals.css`, `:root`, `.dark`, `[data-theme]`, `@theme`), `tailwind.config.*` `theme`/`extend`, theme files (`theme.ts`, `tokens.json`), shadcn `components.json`.
-- **Dead config:** a value that is defined but never used, or wrapped wrongly (an `oklch()` value inside `hsl(var(--x))`), does not describe the product. Check that the config is actually loaded by the build.
+- **Dead config:** a value that is defined but never used, or wrapped wrongly (an `oklch()` value inside `hsl(var(--x))`), does not describe the product. Check that the build loads the config: an `@config` or `@import` line pointing at it, a default export, and no `@theme inline` block that overrides the same names.
 - **Real usage:** count what the templates and components use. Grep class names and arbitrary values (`bg-red-500`, `text-[10px]`, `rounded-xl`, `shadow-sm`, `gap-6`) across the source and keep the counts. Where usage and theme disagree, usage is the product: a status colour that only appears as `text-green-600` is still the success colour.
-- **Fonts:** `@font-face`, font imports, `font-family` in the base CSS. If the repo declares none, the system stack is the product's font; say so.
+- **Fonts:** `@font-face`, font imports, `font-family` in the base CSS. A loaded font counts only when a `font-family` or a theme font token uses it. If none does, the system stack is the product's font; say so.
 - **Icons:** count imports per icon library; the one with most imports is the icon set.
 - **Density and shape:** the common control heights, paddings, gaps and radii from the counts.
 
 ## 3. Tokens
 
-1. Send the stylesheet with `update_design_system` path `import` and `files` but no `apply`. Read the report: mapped, custom, derived and unmapped rows, the mode rows for dark and other themes, and the derived neutral scale.
+1. Send the stylesheet with `update_design_system` path `import` and `files: [{name: "app.css", content: "<the file's text>"}]` but no `apply`. Leave out blocks that hold no variables (utilities, keyframes) when the file is long. Read the report: mapped, custom, derived and unmapped rows, the mode rows for dark and other themes, and the derived neutral scale.
 2. If the mapping is right, apply that dry run with `{import: "<id>", apply: true}` instead of sending the files again. If the draft changed, run the dry run again.
 3. Fill what the import could not: values from the Tailwind config or from usage (status colours, the neutral hue, fonts, shadows, radii). Send one `update_design_system` call with path `tokens` per category, every slot of that category in its patch.
-4. `get_design_system(system, "tokens.<category>")` for colour, font, text, radius, spacing and shadow. A slot that still shows its Viskel default while the repo defines that value is a miss: fix it.
+4. `get_design_system(system, "tokens.<category>")` for colour, font, text, radius, spacing and shadow. A slot with status `default` while the repo defines another value is a miss: fix it. A default that equals the framework's own default the repo uses unchanged (Tailwind's shadows, type scale, spacing) is right; report it as found.
 
 ## 4. Identity
 
-Write each identity section with `update_design_system` path `identity.<section>`: its choices first, then rules. Rules state the product's intent from its conventions, with the evidence where it helps ("Status colours only on badges and alerts: 40 uses in components/ui"). Where the code breaks its own convention (`text-[10px]` against a 12px floor), write the intended rule and list the deviation in the report, not as a rule.
+Write each identity section with `update_design_system` path `identity.<section>`: its choices first, then rules. The choice keys and their kinds (text, enum values, a slot reference or a list of them) are at the end of `update_design_system`'s description; `get_design_system(system, "checklist")` lists the choices each section still needs. A rule is `{text, severity, scope}`; leave `check` out unless the description's check grammar fits it exactly. Rules state the product's intent from its conventions, with the evidence where it helps ("Status colours only on badges and alerts: 40 uses in components/ui"). Where the code breaks its own convention (`text-[10px]` against a 12px floor), write the intended rule and list the deviation in the report, not as a rule.
 
 Cover colour use (which roles carry brand, how status shows), type roles and sizes, shape and depth, layout and density, icons, motion, accessibility, and the Never list: what the product never does.
 
@@ -43,7 +43,7 @@ Cover colour use (which roles carry brand, how status shows), type roles and siz
 
 ## 6. Check
 
-`get_design_system(system, "checklist")` until the tokens, identity and `components.base` steps are done. Do not publish: the first release follows the components.
+`get_design_system(system, "checklist")` until the tokens, identity and `components.base` steps are done. Stop when only `components`, `patterns` and `publish` remain. Do not publish: the first release follows the components.
 
 ## 7. Report
 
