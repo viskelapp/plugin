@@ -10,7 +10,7 @@ Workflow for filling a Viskel design system from a repository. The Viskel server
 ## 1. Connect and pick the system
 
 1. Call `list_design_systems`. If the Viskel tools are missing or answer with an auth error, sign in as `/viskel:design` step 1 says.
-2. Use the system the user named. If there is none, create it with `update_design_system` path `starter`, `system` its name and patch `{title, description}` (no choices: the repo sets the look). Use the space the user named, else the current one, and say which in the report.
+2. Use the system the user named. If there is none, create it with `update_design_system` path `starter`, `system` its name and patch `{title, description}` (no choices: the repo sets the look). Ignore its hint to send `starter` again with choices: the import fills the tokens. Use the space the user named, else the current one, and say which in the report.
 3. `get_design_system(system)`, then `get_design_system(system, "checklist")`. Before each write, read what it changes (`tokens.<category>` after the import, the identity section before its write), so you send the shapes it takes.
 
 ## 2. Survey the repo
