@@ -47,6 +47,7 @@ To sign out, disconnect the app at https://app.viskel.com/settings/connected-app
 | `/viskel:sections` | Group boards into sections, label them, link Jira issues and hand off to development. |
 | `/viskel:collections` | Write a collection of self-contained HTML artifact pages. |
 | `/viskel:import-claude-design` | Bring a claude.ai Design canvas into Viskel as a new design. |
+| `/viskel:design-language` | Fill a design system's tokens, identity guide and base stylesheet from a repo. |
 
 Claude picks the right skill from what you ask; the slash commands start one directly.
 

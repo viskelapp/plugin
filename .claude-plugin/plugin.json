@@ -1,7 +1,7 @@
 {
   "name": "viskel",
   "displayName": "Viskel",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create and edit Viskel designs from Claude: boards, comments, sections, collections and claude.ai Design imports, over the Viskel MCP server with OAuth sign-in.",
   "author": {
     "name": "Viskel",
